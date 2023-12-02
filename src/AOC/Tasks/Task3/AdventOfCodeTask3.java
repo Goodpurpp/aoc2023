@@ -1,11 +1,10 @@
 package AOC.Tasks.Task3;
 
 import AOC.AdventOfCodeTask;
-import AOC.Solving;
 
 import java.io.FileNotFoundException;
 
-public class AdventOfCodeTask3 extends AdventOfCodeTask implements Solving {
+public class AdventOfCodeTask3 extends AdventOfCodeTask {
 
 
     public AdventOfCodeTask3() throws FileNotFoundException {
@@ -14,7 +13,7 @@ public class AdventOfCodeTask3 extends AdventOfCodeTask implements Solving {
 
     @Override
     public void solveFirstPart() {
-
+        getInputStringsTask();
     }
 
     @Override

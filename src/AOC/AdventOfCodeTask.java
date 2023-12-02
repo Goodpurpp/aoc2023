@@ -6,7 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdventOfCodeTask {
+public abstract class AdventOfCodeTask {
     private final Integer taskNumber;
     private FileReader taskFirstFileReader;
 
@@ -30,9 +30,6 @@ public class AdventOfCodeTask {
 
     private List<String> getInputStrings(FileReader taskFileReader) {
         List<String> inputLines = new ArrayList<>();
-        if (taskFileReader == null) {
-            return inputLines;
-        }
         try (var reader = new BufferedReader(taskFileReader)) {
             String line = reader.readLine();
             while (line != null) {
@@ -42,6 +39,13 @@ public class AdventOfCodeTask {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (inputLines.isEmpty()) {
+            throw new IllegalArgumentException("Empty input file");
+        }
         return inputLines;
     }
+
+    public abstract void solveFirstPart();
+
+    public abstract void solveSecondPart();
 }

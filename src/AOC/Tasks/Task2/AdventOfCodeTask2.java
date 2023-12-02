@@ -1,7 +1,6 @@
 package AOC.Tasks.Task2;
 
 import AOC.AdventOfCodeTask;
-import AOC.Solving;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -9,14 +8,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class AdventOfCodeTask2 extends AdventOfCodeTask implements Solving {
-    public static HashMap<String, Integer> m = new HashMap<>();
+public class AdventOfCodeTask2 extends AdventOfCodeTask {
+    public static HashMap<String, Integer> ballsColor = new HashMap<>();
     public static int[] balls;
 
     static {
-        m.put("red", 0);
-        m.put("green", 1);
-        m.put("blue", 2);
+        ballsColor.put("red", 0);
+        ballsColor.put("green", 1);
+        ballsColor.put("blue", 2);
     }
 
     public AdventOfCodeTask2() throws FileNotFoundException {
@@ -28,14 +27,15 @@ public class AdventOfCodeTask2 extends AdventOfCodeTask implements Solving {
         int answer = 0;
         List<String> strs;
         List<String> strs1;
-        boolean isFirstStr = true;
-        boolean success = true;
+        boolean isFirstStr;
+        boolean isSuccessGame;
         int game = 0;
         balls = new int[]{12, 13, 14};
         for (var line : getInputStringsTask()) {
             strs = new ArrayList<>(Arrays.asList(line.split("' '|,|;|:")));
             isFirstStr = true;
-            success = true;
+            isSuccessGame = true;
+            int ballColorIndex;
             for (var s : strs) {
                 strs1 = List.of(s.split(" "));
                 if (isFirstStr) {
@@ -43,12 +43,13 @@ public class AdventOfCodeTask2 extends AdventOfCodeTask implements Solving {
                     isFirstStr = false;
                     continue;
                 }
-                if (balls[m.get(strs1.get(2))] < Integer.parseInt(strs1.get(1))) {
-                    success = false;
+                ballColorIndex = ballsColor.get(strs1.get(2));
+                if (balls[ballColorIndex] < Integer.parseInt(strs1.get(1))) {
+                    isSuccessGame = false;
                     break;
                 }
             }
-            if (success) {
+            if (isSuccessGame) {
                 answer += game;
             }
         }
@@ -61,12 +62,14 @@ public class AdventOfCodeTask2 extends AdventOfCodeTask implements Solving {
         int answer = 0;
         List<String> strs;
         List<String> strs1;
+        int ballColorIndex;
         for (var line : getInputStringsTask()) {
             strs = new ArrayList<>(Arrays.asList(line.split("' '|,|;|:")));
             strs.remove(0);
             for (var s : strs) {
                 strs1 = List.of(s.split(" "));
-                balls[m.get(strs1.get(2))] = Math.max(Integer.parseInt(strs1.get(1)), balls[m.get(strs1.get(2))]);
+                ballColorIndex = ballsColor.get(strs1.get(2));
+                balls[ballColorIndex] = Math.max(Integer.parseInt(strs1.get(1)), balls[ballColorIndex]);
             }
             answer += balls[0] * balls[1] * balls[2];
             balls = new int[]{0, 0, 0};
