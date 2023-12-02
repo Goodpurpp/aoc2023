@@ -1,3 +1,5 @@
+package AOC;
+
 import AOC.Tasks.Task2.AdventOfCodeTask2;
 
 import java.io.FileNotFoundException;

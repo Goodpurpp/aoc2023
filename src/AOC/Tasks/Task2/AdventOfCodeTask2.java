@@ -37,15 +37,13 @@ public class AdventOfCodeTask2 extends AdventOfCodeTask implements Solving {
             isFirstStr = true;
             success = true;
             for (var s : strs) {
-                System.out.println(s);
                 strs1 = List.of(s.split(" "));
                 if (isFirstStr) {
                     game = Integer.parseInt(strs1.get(1));
                     isFirstStr = false;
                     continue;
                 }
-                System.out.println(strs1.get(2)+ " " + strs1.get(1));
-                if(balls[m.get(strs1.get(2))] < Integer.parseInt(strs1.get(1))){
+                if (balls[m.get(strs1.get(2))] < Integer.parseInt(strs1.get(1))) {
                     success = false;
                     break;
                 }
