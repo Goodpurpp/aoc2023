@@ -112,8 +112,9 @@ public class AdventOfCodeTask3 extends AdventOfCodeTask {
             }
         }
         for (var numbersNearOfGear : goodNumsCords.entrySet()) {
-            if (numbersNearOfGear.getValue().size() == 2) {
-                answer += numbersNearOfGear.getValue().get(0) * numbersNearOfGear.getValue().get(1);
+            List<Long> numbers = numbersNearOfGear.getValue();
+            if (numbers.size() == 2) {
+                answer += numbers.get(0) * numbers.get(1);
             }
         }
         System.out.println(answer);
