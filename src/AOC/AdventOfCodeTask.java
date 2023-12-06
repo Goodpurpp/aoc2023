@@ -11,6 +11,8 @@ public abstract class AdventOfCodeTask {
     private FileReader taskFileReader;
     private final StringBuilder stringBuilder = new StringBuilder();
 
+    private List<String> input;
+
     protected AdventOfCodeTask(int taskNumber, String fileNameTask) throws FileNotFoundException {
         this.taskNumber = taskNumber;
         if (fileNameTask != null) {
@@ -28,20 +30,23 @@ public abstract class AdventOfCodeTask {
     }
 
     private List<String> getInputStrings(FileReader taskFileReader){
-        List<String> inputLines = new LinkedList<>();
+        if (input != null) {
+            return input;
+        }
+        input = new LinkedList<>();
         try (var reader = new BufferedReader(taskFileReader)) {
             String line = reader.readLine();
             while (line != null) {
-                inputLines.add(line);
+                input.add(line);
                 line = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if (inputLines.isEmpty()) {
+        if (input.isEmpty()) {
             throw new IllegalArgumentException("Empty input file");
         }
-        return inputLines;
+        return input;
     }
 
     private String makeAbsolutePath(String fileNameTask) {

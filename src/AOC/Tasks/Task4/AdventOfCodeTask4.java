@@ -37,7 +37,8 @@ public class AdventOfCodeTask4 extends AdventOfCodeTask {
                 }
                 secondCard.add(card);
             }
-            long countWinCards = secondCard.stream().filter(firstCard::contains).count();
+            secondCard.retainAll(firstCard);
+            long countWinCards = secondCard.size();
             if (countWinCards != 0)
                 answer += (long) Math.pow(2, countWinCards - 1);
         }
@@ -48,13 +49,12 @@ public class AdventOfCodeTask4 extends AdventOfCodeTask {
     public void solveSecondPart() {
         List<String> inputStrings = getInputStringsTask();
         Set<Integer> firstCard = new HashSet<>();
-        List<Integer> secondCard = new ArrayList<>();
+        Set<Integer> secondCard = new HashSet<>();
         boolean isFirstCard;
         int[] cardCounter = new int[inputStrings.size()];
         Arrays.fill(cardCounter, 1);
         int counterCards = 0;
         String[] splitedCards;
-        long counter;
         for (var str : inputStrings) {
             firstCard.clear();
             secondCard.clear();
@@ -74,8 +74,8 @@ public class AdventOfCodeTask4 extends AdventOfCodeTask {
                 }
                 secondCard.add(card);
             }
-            counter = secondCard.stream().filter(firstCard::contains).count();
-            for (int j = counterCards + 1; j < counterCards + counter + 1; j++) {
+            secondCard.retainAll(firstCard);
+            for (int j = counterCards + 1; j < counterCards + secondCard.size() + 1; j++) {
                 cardCounter[j] += cardCounter[counterCards];
             }
             counterCards++;
